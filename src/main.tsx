@@ -4,7 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.tsx';
 import './index.css';
-import { Home } from './pages/index.ts';
+import { Home, ReduxPage } from './pages';
+import { Provider } from 'react-redux';
+import { store } from './redux/store.ts';
 
 const router = createBrowserRouter([
 	{
@@ -15,12 +17,18 @@ const router = createBrowserRouter([
 				path: '/',
 				element: <Home />,
 			},
+			{
+				path: '/redux',
+				element: <ReduxPage />,
+			},
 		],
 	},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>
 	</React.StrictMode>
 );
