@@ -1,26 +1,16 @@
 import { Link } from 'react-router-dom';
-import { FormEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Login } from '@/components/login';
 
-import { RootState } from '@/redux/store';
-import { login } from '@/redux/user/slice';
+import { selectUser } from '@/redux/user/slice';
 
 export function Home() {
-	const [name, setName] = useState('');
-
-	const user = useSelector((state: RootState) => state.user);
-	const dispatch = useDispatch();
-
-	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		dispatch(login({ name }));
-	};
+	const user = useSelector(selectUser);
 
 	return (
-		<div className="min-h-screen bg-slate-900 text-primary-foreground">
+		<section className="min-h-screen bg-slate-100 text-primary">
 			<div className="flex flex-col items-center pt-16">
 				{user.name ? (
 					<div className="">
@@ -35,32 +25,18 @@ export function Home() {
 						<p>See your tasks in the links below</p>
 
 						<div className="flex gap-4 mt-8">
-							<Button asChild variant={'secondary'}>
+							<Button asChild>
 								<Link to={'/redux'}>Redux</Link>
 							</Button>
-							<Button asChild variant={'secondary'}>
+							<Button asChild>
 								<Link to={'/zustand'}>Zustand</Link>
 							</Button>
 						</div>
 					</div>
 				) : (
-					<form
-						className="container flex flex-col w-full gap-2 max-w-96"
-						onSubmit={handleSubmit}
-						autoComplete="off"
-					>
-						<p className="mb-2">Enter your name</p>
-
-						<Input
-							placeholder="ex.: John..."
-							onChange={(event) => setName(event.target.value)}
-						/>
-						<Button type="submit" variant={'secondary'}>
-							Submit
-						</Button>
-					</form>
+					<Login />
 				)}
 			</div>
-		</div>
+		</section>
 	);
 }
