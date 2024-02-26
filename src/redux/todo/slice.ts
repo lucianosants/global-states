@@ -34,10 +34,7 @@ export const todoSlice = createSlice({
 				id: nanoid(),
 			});
 		},
-		checkTask: (
-			state,
-			action: PayloadAction<{ id: string; status: 'done' | 'pending' }>
-		) => {
+		checkTask: (state, action: PayloadAction<{ id: string }>) => {
 			const task = state.tasks.find(
 				(task) => task.id === action.payload.id
 			);

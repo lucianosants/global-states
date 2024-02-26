@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.tsx';
 import './index.css';
-import { Home, ReduxPage } from './pages';
+import { Home, ReduxPage, ZustandPage } from './pages';
 import { Provider } from 'react-redux';
 import { store } from './redux/store.ts';
 
@@ -20,6 +20,10 @@ const router = createBrowserRouter([
 			{
 				path: '/redux',
 				element: <ReduxPage />,
+			},
+			{
+				path: 'zustand',
+				element: <ZustandPage />,
 			},
 		],
 	},
