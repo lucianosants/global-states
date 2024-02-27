@@ -15,11 +15,19 @@ type TasksCardRootProps = {
 	count: number;
 	isCompleted: number;
 	children: ReactNode;
-	theme?: ThemeVariantProps;
+	variant?: ThemeVariantProps;
 };
 
 export function TasksCardRoot(props: TasksCardRootProps) {
-	const { listName, isCompleted, count, children, theme = 'purple' } = props;
+	const {
+		listName,
+		isCompleted,
+		count,
+		children,
+		variant = 'purple',
+	} = props;
+
+	const variants = variant === 'emerald' ? 'bg-emerald-300' : 'bg-purple-300';
 
 	return (
 		<div>
@@ -30,7 +38,7 @@ export function TasksCardRoot(props: TasksCardRootProps) {
 					completed={isCompleted}
 				/>
 
-				<Card className={`mt-2 bg-${theme}-400 w-fit`}>
+				<Card className={`mt-2 w-fit ${variants}`}>
 					<CardContent>{children}</CardContent>
 				</Card>
 			</div>
@@ -42,11 +50,16 @@ type TasksCardInputProps = {
 	handleAddTask: (event: FormEvent<HTMLFormElement>) => void;
 	content: string;
 	setContent: (value: SetStateAction<string>) => void;
-	theme?: ThemeVariantProps;
+	variant?: ThemeVariantProps;
 };
 
 export function TasksCardInput(props: TasksCardInputProps) {
-	const { handleAddTask, content, setContent, theme = 'purple' } = props;
+	const { handleAddTask, content, setContent, variant = 'purple' } = props;
+
+	const variants =
+		variant === 'emerald'
+			? 'bg-emerald-200 border-emerald-800'
+			: 'bg-purple-200 border-purple-800';
 
 	return (
 		<div className="mt-6">
@@ -57,7 +70,7 @@ export function TasksCardInput(props: TasksCardInputProps) {
 				<Input
 					type="text"
 					placeholder="Enter a task"
-					className={`bg-${theme}-300 border-${theme}-800 placeholder:text-slate-800`}
+					className={`${variants}  placeholder:text-slate-800`}
 					onChange={(event) => setContent(event.target.value)}
 					value={content}
 				/>

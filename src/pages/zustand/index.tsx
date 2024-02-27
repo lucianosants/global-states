@@ -93,13 +93,13 @@ export function ZustandPage() {
 							count={count}
 							isCompleted={isCompleted}
 							listName={listName}
-							theme="emerald"
+							variant="emerald"
 						>
 							<TasksCardInput
 								content={content}
 								setContent={setContent}
 								handleAddTask={handleAddTask}
-								theme="emerald"
+								variant="emerald"
 							/>
 							<TasksCardList
 								tasks={tasks}
